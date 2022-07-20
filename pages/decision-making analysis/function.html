@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>决策分析相关算法</title>
+    <link rel="stylesheet" href="https://7npmedia.w3cschool.cn/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+
+    <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+        <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
+            决策分析 <i class="fa fa-caret-down"></i>
+        </a>
+        <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+            <a href="#crossSection" class="w3-bar-item w3-button">横剖面分析</a>
+            <a href="#longiSection" class="w3-bar-item w3-button">纵剖面分析</a>
+            <a href="#fireEmergency" class="w3-bar-item w3-button">火灾抢险分析</a>
+            <a href="#pipeCrack" class="w3-bar-item w3-button">爆管关阀分析</a>
+            <a href="#vertialDis" class="w3-bar-item w3-button">垂直净距分析</a>
+            <a href="#horizonDis" class="w3-bar-item w3-button">水平净距分析</a>
+            <a href="#DeepAnalyse" class="w3-bar-item w3-button">覆土深度分析</a>
+            <a href="#pieplePlant" class="w3-bar-item w3-button">管线规划设计</a>
+            <a href="#roadExpand" class="w3-bar-item w3-button">道路扩建分析</a>
+            <a href="#boundaryBreak" class="w3-bar-item w3-button">范围拆迁分析</a>
+            <a href="#pipleLine3d" class="w3-bar-item w3-button">管线三维分析</a>
+            <a href="#dx3d" class="w3-bar-item w3-button">地形三维分析</a>
+            <a href="#sptial3d" class="w3-bar-item w3-button">空间三维分析</a>
+        </div>
+    </div>
+
+</nav>
+
+<div class="w3-main" style="margin-left:250px">
+
 xhhdfuxbvuj3949234 数据库连接位置
 <h1>引用</h1>
 <li><a href="../../pages/Demo/arcmap/arcmap.html" target="_blank">ArcGIS Map</a></li>
@@ -62,9 +94,12 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
 <h3>GISMAP相关的操作接口</h3>
 <h4>1.地图对象的搜索方法</h4>
 <ul>
-    <li><font style="color: red">横剖面分析</font></li>
-    <li><img src="../../images/20.png"/></li>
-    <li><img src="../../images/21.png"/></li>
+
+
+
+    <li id="crossSection"><font style="color: red">横剖面分析</font></li>
+    <li><img src="img/20.png"/></li>
+    <li><img src="img/21.png"/></li>
     <li>操作逻辑：点击菜单栏功能之后，使用鼠标在地图上拖拽，会显示辅助线，放开鼠标，显示辅助线与管线交点的横剖面图</li>
     <li>ksdofoxhhg0237497 剖面分析菜单按下的事件处理代码</li>
     <li>fml,bkg98618237 鼠标左键按下的处理代码</li>
@@ -169,9 +204,12 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
             管线类型代码（小类）、管线类型名称（小类）、要素颜色、管线断点处地面高程、管线断点处中心高程、管径（取自字段值）、管线断点至拉线起点的距离、道路名称<br>
         </font>
     </ul>
-    <li><font style="color: red">纵剖面分析</font></li>
-    <li><img src="../../images/22.png"/></li>
-    <li><img src="../../images/23.png"/></li>
+
+
+
+    <li id="longiSection"><font style="color: red">纵剖面分析</font></li>
+    <li><img src="img/22.png"/></li>
+    <li><img src="img/23.png"/></li>
     <li>鼠标点击按下事件 选择地图要素（要求是连续的管线） jfnhxxjuenh873424hxid</li>
     pEnv = _mapCtrl.TrackRectangle(); 等待式鼠标拖动画矩形框选<br>
     Program.UPGISFacade.LSGOMenuAnalysis.SelectPipeLine(pEnv, _mapCtrl); 根据框选结果选择管线<br>
@@ -197,7 +235,9 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
         截面点数量=选择管段数量+1<br>
 
     </ul>
-    <li><font style="color: red">火灾抢险分析</font></li>
+
+
+    <li id="fireEmergency"><font style="color: red">火灾抢险分析</font></li>
     <ul>
         <li>菜单栏点击事件 jbfbvuhf87237y4gd73</li>
         <li>鼠标左键点击事件 sldjfasbnxoheori</li>
@@ -226,7 +266,7 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
 
 
 
-    <li><font style="color: red">爆管关阀分析</font></li>
+    <li id="pipeCrack"><font style="color: red">爆管关阀分析</font></li>
     <li>菜单按钮点击事件 dkfhbxcvdf234794kqls,mx</li>
     <li>鼠标点击事件处理代码 xjdfkxnvojdf182368162399
     <li>查询条件</li>
@@ -243,7 +283,7 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
 
 
 
-    <li><font style="color: red">垂直净距分析</font></li>
+    <li id="vertialDis"><font style="color: red">垂直净距分析</font></li>
     <font style="color: blue">Label: xnxbgdjfh812387rvxqyh MouseDown事件</font><br>
     private void MapCtrlMain_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)<br>
     pPolygon = _mapCtrl.TrackPolygon(); 阻塞式绘制临时图形，绘制完成再进行后续处理<br>
@@ -279,7 +319,7 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
     </font>
 
 
-    <li><font style="color: red">水平净距分析</font></li>
+    <li id="horizonDis"><font style="color: red">水平净距分析</font></li>
     <ul>
         <li>dkfjnvifhiok 水平净距菜单栏点击事件</li>
         单例设置窗口（全局变量）<br>
@@ -319,7 +359,7 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
     /* X1,Y1,Z1,X2,Y2,Z2,Color,管径,管线代码,起点点号,终点点号,管径,材质,起点高程,终点高程,起点埋深,终点埋深,年代,权属单位,备注*/<br>
 
 
-    <li><font style="color: red">覆土深度分析</font></li>
+    <li id="DeepAnalyse"><font style="color: red">覆土深度分析</font></li>
     <ul>
         <li>nvjweoslwxkcvni123 菜单按钮的点击事件</li>
         <li>hbvqxrevxkkf8264sbh 鼠标左键点击事件</li>
@@ -331,7 +371,7 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
     </ul>
 
 
-    <li><font style="color: red">管线规划设计</font></li>
+    <li id="pieplePlant"><font style="color: red">管线规划设计</font></li>
     <ul>
         <li>hddiuncvbe893sl;wkxjhw892 菜单按钮的点击事件</li>
         <li>kjorincn9873461i2g398dfb94 新对话框的确定按钮事件</li>
@@ -346,7 +386,7 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
         select 给水 from VSTANDARD where 上面管类 = '给水' and 1=1   获取规范值<br>
     </ul>
 
-    <li><font style="color: red">道路扩建分析</font></li>
+    <li id="roadExpand"><font style="color: red">道路扩建分析</font></li>
     <ul>
         <li>dsjfjxhfiehr9264 菜单栏点击事件</li>
         <li>jdjgieor7973491023jsdhf 鼠标点击事件</li>
@@ -355,7 +395,7 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
         仅限于 交通设施-面 这个图层<br>
     </ul>
 
-    <li><font style="color: red">范围拆迁分析</font></li>
+    <li id="boundaryBreak"><font style="color: red">范围拆迁分析</font></li>
     <ul>
         <li>fjxkncjf294850sjkx.cvmaje 菜单栏点击事件</li>
         <li>jhchdeiueyhzn298371j1kude 鼠标点击确定按钮的事件</li>
@@ -365,7 +405,7 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
         <li>jjhcdjeie837gcvbwj828 剪裁预览窗口</li>
     </ul>
 
-    <li><font style="color: red">管线三维分析</font></li>
+    <li id="pipleLine3d"><font style="color: red">管线三维分析</font></li>
     <ul>
         <li>jdjicjeir862hdi8i2h2 菜单栏的点击事件</li>
         <li>nndkdjfh92731hxu934hfu234 鼠标左键点击事件</li>
@@ -386,13 +426,13 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
         string path = LSGOGisSystemProperty.WorkDirectory+@"\3DAnalyse\VisualPipeLine.3ds";  c,.elwk849hsof93 写入管线数据<br>
     </ul>
 
-    <li><font style="color: red">地形三维分析</font></li>
+    <li id="dx3d"><font style="color: red">地形三维分析</font></li>
     <ul>
         <li>djkrj390850hzofjjvgnpq 鼠标左键的释放事件</li>
         <li>kcjjfiooejni3948jhd89du3 分析算法一致</li>
     </ul>
 
-    <li><font style="color: red">空间三维分析</font></li>
+    <li id="sptial3d"><font style="color: red">空间三维分析</font></li>
     <ul>
         <li>jcjjnjfkqp,vmpr9234u 鼠标左键的释放事件</li>
         <li>分析算法一致</li>
@@ -418,5 +458,35 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
     据猜测，z=点高程-埋深<br>
     验证map成图的几何数据
 </ul>
+</div>
+
+
+<script>
+    // Accordion
+    function myAccFunc() {
+        var x = document.getElementById("demoAcc");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+
+    // Click on the "Jeans" link on page load to open the accordion for demo purposes
+    document.getElementById("myBtn").click();
+
+
+    // Open and close sidebar
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
+</script>
+
 </body>
 </html>
