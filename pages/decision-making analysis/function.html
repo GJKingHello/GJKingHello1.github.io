@@ -31,6 +31,19 @@
             <a href="#dx3d" class="w3-bar-item w3-button">地形三维分析</a>
             <a href="#sptial3d" class="w3-bar-item w3-button">空间三维分析</a>
         </div>
+
+
+
+        <a onclick="dataStaticFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="dataStatic">
+            数据统计 <i class="fa fa-caret-down"></i>
+        </a>
+        <div id="dataStaticAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+            <a href="#WholeDBPipelineLength" class="w3-bar-item w3-button">全库管线长度统计</a>
+            <a href="#WholeDBPipePointCount" class="w3-bar-item w3-button">全库管点数量统计</a>
+            <a href="#WholeDBPipeLineSortStatic" class="w3-bar-item w3-button">全库管线分类统计</a>
+        </div>
+
+
     </div>
 
 </nav>
@@ -440,7 +453,54 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
 
 
 </ul>
-<h1>二、其他相关算法</h1>
+
+    <h1>二、数据统计</h1>
+    <ul>
+        <li id="WholeDBPipelineLength"><font style="color: red">1.全库管线长度统计</font></li>
+        <img src="img/1.png"/><br>
+        jhnckemfjr178236gsydf723y 菜单栏点击事件<br>
+        jfnvjr893472jd893uiihao 开始统计<br>
+        每个图层单独统计，统计完一个显示一个 jncnbfkmadfnnfhcbqui1u774hc612hsx92<br>
+        现有计算:select [材质] As F1,Sum([管段间距]) as F2 from [JSL] group by [材质]<br>
+        重新计算：select A.材质 as F1,Sum(sqr((A.起点高程-A.终点高程)*(A.起点高程-A.终点高程)+(B.Y-C.Y)*(B.Y-C.Y)+(B.X-C.X)*(B.X-C.X))) AS F2 from (JSL as A inner join JSP as B on A.起始点号=B.物探点号) inner join JSP as C on A.终止点号=C.物探点号 Group BY A.材质<br>
+
+        <li id="WholeDBPipePointCount"><font style="color: red">2.全库管点数量统计</font></li>
+        <img src="img/2.png"/><br>
+        hcheie938hxaoxjeu28 菜单栏点击事件<br>
+        jfnvjr893472jd893uiihao 开始统计（与全库管线统计用的同一个界面）<br>
+        每个图层单独统计，统计完一个显示一个 jncnbfkmadfnnfhcbqui1u774hc612hsx92<br>
+        xdkcnakl398djed93jx01k<br>
+        Select 特征 As F1,Count(*) As F2 From JSP Group By 特征<br>
+
+
+        <li id="WholeDBPipeLineSortStatic"><font style="color: red">3.全库管线分类统计</font></li>
+        <img src="img/3.png"/><br>
+        cjjdhj28337883yd82jdjhaie 菜单栏点击事件<br>
+        hcjdnfjf9347hsd89h3 开始统计（与全库管线/管点统计用的不是同一个界面）<br>
+        枚举出分类属性的所有值 xjjefj29311x0cvje03<br>
+        通过SpatialFilterClass.whereClouse进行统计<br>
+        现有计算，对 管段间距 求和<br>
+        重新计算,tmpLng = System.Math.Sqrt((H1 - H2) * (H1 - H2) + pPolyline.Length * pPolyline.Length);  jjcjvhifuy9234976xgbcv0q3-ejco99u20M<br>
+        在arcgis几何长度基础之上，增加了高程，进而求出管线的空间长度<br>
+
+        <li id="WholeDBPipePointSortStatic"><font style="color: red">4.全库管点分类统计</font></li>
+        <img src="img/4.png"/><br>
+        jhxhb98dvjkbhb3r09k1kcb3 菜单栏点击事件<br>
+        统计界面与 全库管线分类统计 用的同一个界面<br>
+        通过统计类型切换界面元素的显示与隐藏，管点分类统计没有现有计算<br>
+
+
+        <li id="WholeDBPipeMaterialsSortStatic"><font style="color: red">5.按管线材质统计</font></li>
+        <img src="img/5.png"/><br>
+        <img src="img/6.png"/><br>
+        nxdfj2389dyv298d93 菜单栏点击事件<br>
+
+    </ul>
+
+
+
+
+<h1>三、其他相关算法</h1>
 <ul>
     <li><font style="color: red">管线数据入库流程，用从点线表里取到的x,y值生成arcmap中的几何对象</font></li>
     <font style="color: blue">Label: a;ldkfjklasnd</font><br>
@@ -465,6 +525,15 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
     // Accordion
     function myAccFunc() {
         var x = document.getElementById("demoAcc");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+
+    function dataStaticFunc() {
+        var x = document.getElementById("dataStaticAcc");
         if (x.className.indexOf("w3-show") == -1) {
             x.className += " w3-show";
         } else {
