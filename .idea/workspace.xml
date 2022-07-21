@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1e322cf-38c8-46ca-8824-4c41dbcca02b" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/article/Why Humans Exist-The Meaning of Life.html" afterDir="false" />
+    <list default="true" id="a1e322cf-38c8-46ca-8824-4c41dbcca02b" name="变更" comment="1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/decision-making analysis/function.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/decision-making analysis/function.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/record.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/record.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,8 +51,16 @@
       <workItem from="1658194648162" duration="9169000" />
       <workItem from="1658274727939" duration="77000" />
       <workItem from="1658274818418" duration="24063000" />
-      <workItem from="1658361297799" duration="15935000" />
+      <workItem from="1658361297799" duration="16358000" />
     </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1658385777859</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1658385777859</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -72,5 +79,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>
