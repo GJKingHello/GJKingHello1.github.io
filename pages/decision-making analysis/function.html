@@ -41,6 +41,20 @@
             <a href="#WholeDBPipelineLength" class="w3-bar-item w3-button">全库管线长度统计</a>
             <a href="#WholeDBPipePointCount" class="w3-bar-item w3-button">全库管点数量统计</a>
             <a href="#WholeDBPipeLineSortStatic" class="w3-bar-item w3-button">全库管线分类统计</a>
+
+            <a href="#WholeDBPipePointSortStatic" class="w3-bar-item w3-button">全库管点分类统计</a>
+            <a href="#WholeDBPipeMaterialsSortStatic" class="w3-bar-item w3-button">按管线材质统计</a>
+            <a href="#WholeDBPipeDiameterSortStatic" class="w3-bar-item w3-button">按管线管径统计</a>
+            <a href="#WholeDBPipeAgeSortStatic" class="w3-bar-item w3-button">按建设年代统计</a>
+            <a href="#WholeDBPipeWorkSortStatic" class="w3-bar-item w3-button">按权属单位统计</a>
+            <a href="#WholeDBPipeRoadrSortStatic" class="w3-bar-item w3-button">按所在道路统计</a>
+
+            <a href="#WholeDBSimpleConditionStatic" class="w3-bar-item w3-button">全库简单条件统计</a>
+            <a href="#WholeDBComplexConditionStatic" class="w3-bar-item w3-button">全库复合条件统计</a>
+            <a href="#WholeDBRegionPipleLineStatic" class="w3-bar-item w3-button">区域内管线长度统计</a>
+            <a href="#WholeDBRegionPiplePointcountStatic" class="w3-bar-item w3-button">区域内管点数量统计</a>
+            <a href="#WholeDBRegionComplexConditionStatic" class="w3-bar-item w3-button">区域内复合条件统计</a>
+
         </div>
 
 
@@ -459,15 +473,25 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
         <li id="WholeDBPipelineLength"><font style="color: red">1.全库管线长度统计</font></li>
         <img src="img/1.png"/><br>
         jhnckemfjr178236gsydf723y 菜单栏点击事件<br>
+        FrmStatGdNumOrGxLen 参数设置界面<br>
+        传入数据： IType = 0（0代表管线 1代表管点） 和地图控件 _mapCtrl<br>
+        调用方法A：public StatInfo StatByCondition(ILSGOMisDbControlStructure MisDBControlStructure, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, string CorrLayerName)<br>
         jfnvjr893472jd893uiihao 开始统计<br>
         每个图层单独统计，统计完一个显示一个 jncnbfkmadfnnfhcbqui1u774hc612hsx92<br>
         现有计算:select [材质] As F1,Sum([管段间距]) as F2 from [JSL] group by [材质]<br>
+        获得表名称："Select Name From TableInfo Where [IsMetaDataSet]='True'"<br>
         重新计算：select A.材质 as F1,Sum(sqr((A.起点高程-A.终点高程)*(A.起点高程-A.终点高程)+(B.Y-C.Y)*(B.Y-C.Y)+(B.X-C.X)*(B.X-C.X))) AS F2 from (JSL as A inner join JSP as B on A.起始点号=B.物探点号) inner join JSP as C on A.终止点号=C.物探点号 Group BY A.材质<br>
+        <font style="color: blue">
+            注：1.管线长度使用的是x,y,点高程(没有区分是否为排水)
+        </font>
 
         <li id="WholeDBPipePointCount"><font style="color: red">2.全库管点数量统计</font></li>
         <img src="img/2.png"/><br>
         hcheie938hxaoxjeu28 菜单栏点击事件<br>
         jfnvjr893472jd893uiihao 开始统计（与全库管线统计用的同一个界面）<br>
+        FrmStatGdNumOrGxLen 参数设置界面<br>
+        IType = 1<br>
+        调用方法A：public StatInfo StatByCondition(ILSGOMisDbControlStructure MisDBControlStructure, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, string CorrLayerName)<br>
         每个图层单独统计，统计完一个显示一个 jncnbfkmadfnnfhcbqui1u774hc612hsx92<br>
         xdkcnakl398djed93jx01k<br>
         Select 特征 As F1,Count(*) As F2 From JSP Group By 特征<br>
@@ -477,16 +501,28 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
         <img src="img/3.png"/><br>
         cjjdhj28337883yd82jdjhaie 菜单栏点击事件<br>
         hcjdnfjf9347hsd89h3 开始统计（与全库管线/管点统计用的不是同一个界面）<br>
+        FrmStatByClass 参数设置界面<br>
+        IType = 0<br>
         枚举出分类属性的所有值 xjjefj29311x0cvje03<br>
-        通过SpatialFilterClass.whereClouse进行统计<br>
+        <font style="color: blue">当属性值为DBNull时，设置为未分类类别，这个类别是无法在数据库中查找到记录<br></font>
+        调用方法B：public StatInfo StatByCondition(MapControl MapCtrl, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, IGeometry Geometry)<br>
+        通过SpatialFilterClass.whereClouse进行管线查询<br>
         现有计算，对 管段间距 求和<br>
-        重新计算,tmpLng = System.Math.Sqrt((H1 - H2) * (H1 - H2) + pPolyline.Length * pPolyline.Length);  jjcjvhifuy9234976xgbcv0q3-ejco99u20M<br>
-        在arcgis几何长度基础之上，增加了高程，进而求出管线的空间长度<br>
+        重新计算,tmpLng = System.Math.Sqrt((H1(起点高程) - H2(终点高程)) * (H1 - H2) + pPolyline.Length * pPolyline.Length);  jjcjvhifuy9234976xgbcv0q3-ejco99u20M<br>
+        <font style="color: blue">
+            在arcgis几何长度基础之上，增加了高程，进而求出管线的空间长度<br>
+            使用的是线表点高程，但没有区分给水与排水<br>
+        </font>
+
 
         <li id="WholeDBPipePointSortStatic"><font style="color: red">4.全库管点分类统计</font></li>
         <img src="img/4.png"/><br>
         jhxhb98dvjkbhb3r09k1kcb3 菜单栏点击事件<br>
         统计界面与 全库管线分类统计 用的同一个界面<br>
+        FrmStatByClass 参数设置界面<br>
+        IType = 1<br>
+        调用方法B：public StatInfo StatByCondition(MapControl MapCtrl, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, IGeometry Geometry)<br>
+        对每个图层应用IQueryFilter进行统计查询(特征 = '未分类)<br>
         通过统计类型切换界面元素的显示与隐藏，管点分类统计没有现有计算<br>
 
 
@@ -494,6 +530,89 @@ public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调�
         <img src="img/5.png"/><br>
         <img src="img/6.png"/><br>
         nxdfj2389dyv298d93 菜单栏点击事件<br>
+        FrmStatOneStep 参数设置对话框 IStatType = 1<br>
+        jxnldfkcn23868xcg2387gaoqlznf 开始统计事件<br>
+        调用方法B：public StatInfo StatByCondition(MapControl MapCtrl, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, IGeometry Geometry)<br>
+        通过管线子类名称与"-管线"进行拼接，从而得到图层名称，通过图层名称获得相应的图层<br>
+        使用WhereClause进行统计 "材质 = '钢' And ([材质]='钢')"<br>
+        现有计算，对 管段间距 求和<br>
+        重新计算,tmpLng = System.Math.Sqrt((H1(起点高程) - H2(终点高程)) * (H1 - H2) + pPolyline.Length * pPolyline.Length);  jjcjvhifuy9234976xgbcv0q3-ejco99u20M<br>
+        点完查询，参数设置界面隐藏<br>
+
+        <li id="WholeDBPipeDiameterSortStatic"><font style="color: red">6.按管线管径统计</font></li>
+        jjixnfj2391hsdfh92384 菜单栏点击事件<br>
+        FrmStatOneStep 参数设置对话框 IStatType = 2<br>
+        同上，调用同一个参数设置界面，IStatType值不同仅仅对界面选项进行设置，算法一致<br>
+
+        <li id="WholeDBPipeAgeSortStatic"><font style="color: red">7.按建设年代统计</font></li>
+        jjxi39xc2330kqlx,fbn29 菜单栏点击事件<br>
+        FrmStatOneStep 参数设置对话框 IStatType = 3<br>
+        同上，调用同一个参数设置界面，IStatType值不同仅仅对界面选项进行设置，算法一致<br>
+
+        <li id="WholeDBPipeWorkSortStatic"><font style="color: red">8.按权属单位统计</font></li>
+        hjcjhdb38fh8j3hc912bf 菜单栏点击事件<br>
+        FrmStatOneStep 参数设置对话框 IStatType = 4<br>
+        同上，调用同一个参数设置界面，IStatType值不同仅仅对界面选项进行设置，算法一致<br>
+
+        <li id="WholeDBPipeRoadrSortStatic"><font style="color: red">9.按所在道路统计</font></li>
+        bxcbv2330912nv023jfa;ls92 菜单栏点击事件<br>
+        FrmStatOneStep 参数设置对话框 IStatType = 5<br>
+        同上，调用同一个参数设置界面，IStatType值不同仅仅对界面选项进行设置，算法一致<br>
+
+        <li id="WholeDBSimpleConditionStatic"><font style="color: red">10.全库简单条件统计</font></li>
+        <img src="img/7.png"/><br>
+        <img src="img/8.png"/><br>
+        hixidf893bc93dasf3 菜单栏的点击事件<br>
+        FrmStatSimple 参数设置对话框<br>
+        产生查询条件 "[材质]='钢'"<br>
+        xidhcjh38910jsdhf8234h 进行统计<br>
+        调用方法B:public StatInfo StatByCondition(MapControl MapCtrl, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, IGeometry Geometry)<br>
+
+        <li id="WholeDBComplexConditionStatic"><font style="color: red">11.全库复合条件统计</font></li>
+        <img src="img/9.png"/><br>
+        <img src="img/10.png"/><br>
+        jhcb29dscb109df330dha 菜单栏的点击事件<br>
+        FrmStatComplex 参数设置对话框<br>
+        jldkfkjnvid923047hc9823y 开始统计<br>
+        生成WhereClause条件<br>
+        调用方法B:statInfor = Program.UPGISFacade.LSGOMenuStat.StatByCondition(mapCtrl, lyrName, cmbFld.Text, richBExpresion.Text.Trim(), statType, iType, pGN);<br>
+
+        <li id="WholeDBRegionPipleLineStatic"><font style="color: red">12.区域内管线长度统计</font></li>
+        <img src="img/11.png"/><br>
+        <img src="img/12.png"/><br>
+        hci82jnjc91kfg;'xckh 菜单栏的点击事件<br>
+        FrmInputByCoordinate 区域选择对话框<br>
+        hxubasfbeurbxh82349hc83 鼠标点击事件M<br>
+        FrmStatGdNumOrGxLen 区域管线长度统计参数设置对话框<br>
+        Program.UPGISFacade.FormRunList.FrmStatGdNumOrGxLen.IType = 2;
+        调用方法B：public StatInfo StatByCondition(MapControl MapCtrl, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, IGeometry Geometry)<br>
+        通过 SpatialFilterClass 来查询要统计的区域以及查询条件，长度单独计算<br>
+
+
+        <li id="WholeDBRegionPiplePointcountStatic"><font style="color: red">13.区域内管点数量统计</font></li>
+        <img src="img/11.png"/><br>
+        <img src="img/13.png"/><br>
+        hu892c921h0d=ac023 菜单栏的点击事件<br>
+        FrmInputByCoordinate 区域选择对话框<br>
+        hxubasfbeurbxh82349hc83 鼠标点击事件<br>
+        FrmStatGdNumOrGxLen 区域管线长度统计参数设置对话框<br>
+        Program.UPGISFacade.FormRunList.FrmStatGdNumOrGxLen.IType = 3;
+        调用方法B：public StatInfo StatByCondition(MapControl MapCtrl, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, IGeometry Geometry)<br>
+        通过 SpatialFilterClass 来查询要统计的区域以及查询条件，长度单独计算<br>
+
+        <li id="WholeDBRegionComplexConditionStatic"><font style="color: red">14.区域内复合条件统计</font></li>
+        <img src="img/14.png"/><br>
+        <img src="img/15.png"/><br>
+        hc9c823hpcj=rgp3JJ9023H 菜单栏的点击事件<br>
+        FrmStatSelectControl 区域选择对话框<br>
+        jjxjdi23ijd8203jcc-1=-1jf 鼠标点击事件<br>
+        拖动绘制统计区域,然后弹出参数设置界面<br>
+        FrmStatComplex 参数设置界面<br>
+        传参<br>
+        Program.UPGISFacade.FormRunList.FrmStatComplex.IType = 1;<br>
+        Program.UPGISFacade.FormRunList.FrmStatComplex.MapCtrl = _mapCtrl;<br>
+        Program.UPGISFacade.FormRunList.FrmStatComplex.PGN = pPolygon as IPolygon;<br>
+        jldkfkjnvid923047hc9823y 进行统计<br>
 
     </ul>
 
