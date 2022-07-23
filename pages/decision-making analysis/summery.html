@@ -1,173 +1,195 @@
 <!DOCTYPE html>
-<html>
-<title>编程狮(w3cschool.cn)</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://7npmedia.w3cschool.cn/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
-<style>
-    body, html {
-        height: 100%;
-        font-family: "Inconsolata", sans-serif;
-    }
-
-    .bgimg {
-        background-position: center;
-        background-size: cover;
-        background-image: url("https://atts.w3cschool.cn/coffeehouse.jpg");
-        min-height: 75%;
-    }
-
-    .menu {
-        display: none;
-    }
-</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>决策分析相关算法</title>
+    <link rel="stylesheet" href="https://7npmedia.w3cschool.cn/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <body>
 
-<!-- Links (sit on top) -->
-<div class="w3-top">
-    <div class="w3-row w3-padding w3-black">
-        <div class="w3-col s3">
-            <a href="#" class="w3-button w3-block w3-black">主页</a>
+
+
+
+
+
+
+
+<h1>点线表字段说明</h1>
+<h2>1.线表</h2>
+<ul>
+    <li>起点埋深</li>
+    给水埋深 到管顶<br>
+    排水埋深 到管底（内壁）<br>
+    <li>终点埋深</li>
+    <li>起点高程=起点地面高程-起点埋深</li>
+    <li>终点高程=终点地面高程-终点埋深</li>
+</ul>
+<h2>2.点表</h2>
+<ul>
+    <li>地面高程</li>
+</ul>
+<h1>问题</h1>
+<font style="color: #9c27b0">
+    <ul>
+        <li>埋设方式与管类型的关系 断面类型(0为圆管,1为方管) lsdjnvoihjf890234865</li>
+        if (tGxAnaInfo.DType == "直埋")<br>
+        tGxAnaInfo.DmType = 0;<br>
+        else<br>
+        tGxAnaInfo.DmType = 1;<br>
+        <li>方管与圆管管径存储方式的区别是什么 dkhnd9762650shctri</li>
+        <li>横剖面分析，计算长度时没有考虑高程，因此后续的高程插值计算与实际高程误差很大 sdkhfxvhujf92374682394hxid</li>
+        <li>对硬材料管的高程进行插值计算得出的结果与实际高程基本没有误差，但软材料插值出来的结果是存在一定误差的（随地面高程的改变而改变）（待商榷） 求管线某点高程</li>
+        <li>求管径的算法不一致，冗余  jxhfleinxv89236xhchd 与 jvjuhx[];.'1283 </li>
+        <li>判断管网是否为排水的方法不一致，并且通过编码常量来定义，不支持后期改动 klnfhfkjebr824649123 与 sjdfhioxhgdksdjfh</li>
+        <li>枚举类型是否应该确定到具体类型，else之后是有很多类型的 sdhfhxfdj2384675239hxdfg</li>
+        <li>横剖面与纵剖面图纸间距的问题 求的应该是管线在xy平面投影的长度</li>
+    </ul>
+</font>
+
+
+<h3>菜单按钮处理的公共流程</h3>
+<li>1.点击菜单,所有菜单点击事件共用一个处理器,switch通过item.name分发处理 lshbxkhgh8763912hdsl</li>
+<li>2.修改鼠标样式</li>
+<li>3.MapCtrlMain.CurrentTool = null; arcmap特有工具对象设置为空</li>
+<li>4.ksdofoxhhg0237497 记录当前地图工作状态</li><br>
+<li>5.鼠标左键按下的事件处理程序(Down) FBMouseDown,FBMouseMove,FBEnd三个函数完成鼠标跟踪效果 lsekjfhfvoer923874923</li>
+<li>6.dknfgikr9716349734 鼠标移动时的处理代码 AppComFun.FBMouseMove</li>
+<li>7.鼠标按键释放的处理程序(Up) FBEnd xlkjvhfklhasdfh9123797532</li>
+<h3>UPGIS类库的调用方式</h3>
+Program.UPGISFacade.LSGOMenuAnalysis.SelectPipeLine(pEnv, _mapCtrl); skjhvhofr02374hdfbqiodbxlz<br>
+public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调用 jxnfj388jbzhwi<br>
+<h3>GISMAP相关的操作接口</h3>
+<h4>1.地图对象的搜索方法</h4>
+
+
+
+xhhdfuxbvuj3949234 数据库连接位置
+<h1>引用</h1>
+<h1>1.问题</h1>
+<li><a href="../../pages/Demo/arcmap/arcmap.html" target="_blank">ArcGIS Map</a></li>
+<li><a href="problom.html">问题</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+
+    <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+        <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">决策分析 <i class="fa fa-caret-down"></i></a>
+        <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+            <a href="#crossSection" class="w3-bar-item w3-button">横剖面分析</a>
+            <a href="#longiSection" class="w3-bar-item w3-button">纵剖面分析</a>
+            <a href="#fireEmergency" class="w3-bar-item w3-button">火灾抢险分析</a>
+            <a href="#pipeCrack" class="w3-bar-item w3-button">爆管关阀分析</a>
+            <a href="#vertialDis" class="w3-bar-item w3-button">垂直净距分析</a>
+            <a href="#horizonDis" class="w3-bar-item w3-button">水平净距分析</a>
+            <a href="#DeepAnalyse" class="w3-bar-item w3-button">覆土深度分析</a>
+            <a href="#pieplePlant" class="w3-bar-item w3-button">管线规划设计</a>
+            <a href="#roadExpand" class="w3-bar-item w3-button">道路扩建分析</a>
+            <a href="#boundaryBreak" class="w3-bar-item w3-button">范围拆迁分析</a>
+            <a href="#pipleLine3d" class="w3-bar-item w3-button">管线三维分析</a>
+            <a href="#dx3d" class="w3-bar-item w3-button">地形三维分析</a>
+            <a href="#sptial3d" class="w3-bar-item w3-button">空间三维分析</a>
         </div>
-        <div class="w3-col s3">
-            <a href="#about" class="w3-button w3-block w3-black">关于</a>
+
+        <a onclick="dataStaticFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="dataStatic">
+            数据统计 <i class="fa fa-caret-down"></i>
+        </a>
+        <div id="dataStaticAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+            <a href="#WholeDBPipelineLength" class="w3-bar-item w3-button">全库管线长度统计</a>
+            <a href="#WholeDBPipePointCount" class="w3-bar-item w3-button">全库管点数量统计</a>
+            <a href="#WholeDBPipeLineSortStatic" class="w3-bar-item w3-button">全库管线分类统计</a>
+
+            <a href="#WholeDBPipePointSortStatic" class="w3-bar-item w3-button">全库管点分类统计</a>
+            <a href="#WholeDBPipeMaterialsSortStatic" class="w3-bar-item w3-button">按管线材质统计</a>
+            <a href="#WholeDBPipeDiameterSortStatic" class="w3-bar-item w3-button">按管线管径统计</a>
+            <a href="#WholeDBPipeAgeSortStatic" class="w3-bar-item w3-button">按建设年代统计</a>
+            <a href="#WholeDBPipeWorkSortStatic" class="w3-bar-item w3-button">按权属单位统计</a>
+            <a href="#WholeDBPipeRoadrSortStatic" class="w3-bar-item w3-button">按所在道路统计</a>
+
+            <a href="#WholeDBSimpleConditionStatic" class="w3-bar-item w3-button">全库简单条件统计</a>
+            <a href="#WholeDBComplexConditionStatic" class="w3-bar-item w3-button">全库复合条件统计</a>
+            <a href="#WholeDBRegionPipleLineStatic" class="w3-bar-item w3-button">区域内管线长度统计</a>
+            <a href="#WholeDBRegionPiplePointcountStatic" class="w3-bar-item w3-button">区域内管点数量统计</a>
+            <a href="#WholeDBRegionComplexConditionStatic" class="w3-bar-item w3-button">区域内复合条件统计</a>
+
         </div>
-        <div class="w3-col s3">
-            <a href="#menu" class="w3-button w3-block w3-black">菜单</a>
-        </div>
-        <div class="w3-col s3">
-            <a href="#where" class="w3-button w3-block w3-black">地点</a>
-        </div>
+
     </div>
+
+</nav>
+
+<div class="w3-main" style="margin-left:250px">
+    <h1>一、程序集引用关系</h1>
+<h1>二、类关系</h1>
+    <h1>三、数据关系</h1>
 </div>
 
-<!-- Header with image -->
-<header class="bgimg w3-display-container w3-grayscale-min" id="home">
-    <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
-        <span class="w3-tag">营业时间为早上6点至下午5点</span>
-    </div>
-    <div class="w3-display-middle w3-center">
-        <span class="w3-text-white" style="font-size:90px"><br>咖啡</span>
-    </div>
-    <div class="w3-display-bottomright w3-center w3-padding-large">
-        <span class="w3-text-white">第15街道</span>
-    </div>
-</header>
-
-<!-- Add a background color and large text to the whole page -->
-<div class="w3-sand w3-grayscale w3-large">
-
-    <!-- About Container -->
-    <div class="w3-container" id="about">
-        <div class="w3-content" style="max-width:700px">
-            <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">关于这家咖啡店</span></h5>
-            <p>这家咖啡馆是由史密斯先生在布拉布拉创立的，他在那里坐着，奉献着自己的爱，为自己的劳动和伟大的事业而奋斗。我想说的是，如果不进行实践，就不能得出一般的结果.</p>
-            <p>除了我们的全浓缩咖啡和冲泡酒吧菜单，我们提供新鲜的定制早餐和午餐三明治，以及选择的配菜和沙拉和其他好东西.</p>
-            <div class="w3-panel w3-leftbar w3-light-grey">
-                <p><i>"使用天然产品是有价值的，但不要太早，也不要太晚." 新鲜是新的甜蜜.</i></p>
-                <p>厨师、咖啡师和老板:利亚姆·布朗</p>
-            </div>
-            <img src="https://atts.w3cschool.cn/coffeeshop.jpg" style="width:100%;max-width:1000px" class="w3-margin-top">
-            <p><strong>开放时间:</strong> 每天早上6点到下午5点.</p>
-            <p><strong>地址:</strong> 15 Adr street, 5015, NY</p>
-        </div>
-    </div>
-
-    <!-- Menu Container -->
-    <div class="w3-container" id="menu">
-        <div class="w3-content" style="max-width:700px">
-
-            <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">菜单</span></h5>
-
-            <div class="w3-row w3-center w3-card w3-padding">
-                <a href="javascript:void(0)" onclick="openMenu(event, 'Eat');" id="myLink">
-                    <div class="w3-col s6 tablink">吃</div>
-                </a>
-                <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');">
-                    <div class="w3-col s6 tablink">喝</div>
-                </a>
-            </div>
-
-            <div id="Eat" class="w3-container menu w3-padding-48 w3-card">
-                <h5>面包篮子</h5>
-                <p class="w3-text-grey">各种新鲜的烤水果面包和松饼5.50</p><br>
-
-                <h5>蜂蜜杏仁格兰诺拉麦片和水果</h5>
-                <p class="w3-text-grey">蜂蜜、烤燕麦、葡萄干、杏仁和枣子的天然谷物7.00</p><br>
-
-                <h5>比利时华夫饼干</h5>
-                <p class="w3-text-grey">香草味面糊，麦芽糖粉7.50</p><br>
-
-                <h5>炒蛋</h5>
-                <p class="w3-text-grey">炒鸡蛋，烤红辣椒和大蒜，和大葱7.50</p><br>
-
-                <h5>蓝莓煎饼</h5>
-                <p class="w3-text-grey">用糖浆，黄油和大量的浆果</p>
-            </div>
-
-            <div id="Drinks" class="w3-container menu w3-padding-48 w3-card">
-                <h5>咖啡</h5>
-                <p class="w3-text-grey">咖啡2.50</p><br>
-
-                <h5>巧克力</h5>
-                <p class="w3-text-grey">巧克力浓缩咖啡加牛奶4.50</p><br>
-
-                <h5>咖啡</h5>
-                <p class="w3-text-grey">威士忌和咖啡5美元</p><br>
-
-                <h5>冰茶</h5>
-                <p class="w3-text-grey">热茶，不过不是热的3.00</p><br>
-
-                <h5>苏打水</h5>
-                <p class="w3-text-grey">可乐，雪碧，芬达，等等2.5美元</p>
-            </div>
-            <img src="https://atts.w3cschool.cn/coffeehouse2.jpg" style="width:100%;max-width:1000px;margin-top:32px;">
-        </div>
-    </div>
-
-    <!-- Contact/Area Container -->
-    <div class="w3-container" id="where" style="padding-bottom:32px;">
-        <div class="w3-content" style="max-width:700px">
-            <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">去哪里找我们</span></h5>
-            <p>在某个地方某个地址找到我们.</p>
-            <img src="https://atts.w3cschool.cn/map.jpg" class="w3-image" style="width:100%">
-            <p><span class="w3-tag">FYI!</span> 我们为任何活动提供全方位服务，不论大小。我们了解您的需求，我们将迎合食物，以满足他们所有最大的标准，包括外观和口味.</p>
-            <p><strong>储备</strong> 一张桌子，要今天的特餐，或者只是给我们发个信息:</p>
-            <form action="/action_page.php" target="_blank">
-                <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="姓名" required name="Name"></p>
-                <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="有多少人" required name="People"></p>
-                <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="日期和时间" required name="date" value="2020-11-16T20:00"></p>
-                <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="留言\特殊要求" required name="Message"></p>
-                <p><button class="w3-button w3-black" type="submit">发送消息</button></p>
-            </form>
-        </div>
-    </div>
-
-    <!-- End page content -->
-</div>
-
-<!-- Footer -->
-<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-    <p>来自 <a href="https://www.w3cschool.cn/w3css/" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-</footer>
 
 <script>
-    // Tabbed Menu
-    function openMenu(evt, menuName) {
-        var i, x, tablinks;
-        x = document.getElementsByClassName("menu");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
+    // Accordion
+    function myAccFunc() {
+        var x = document.getElementById("demoAcc");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
         }
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < x.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
-        }
-        document.getElementById(menuName).style.display = "block";
-        evt.currentTarget.firstElementChild.className += " w3-dark-grey";
     }
-    document.getElementById("myLink").click();
+
+    function dataStaticFunc() {
+        var x = document.getElementById("dataStaticAcc");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+
+    // Click on the "Jeans" link on page load to open the accordion for demo purposes
+    document.getElementById("myBtn").click();
+
+
+    // Open and close sidebar
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
 </script>
 
 </body>

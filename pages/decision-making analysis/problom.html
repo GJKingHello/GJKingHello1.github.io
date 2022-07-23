@@ -5,61 +5,6 @@
     <title>决策分析相关算法</title>
 </head>
 <body>
-xhhdfuxbvuj3949234 数据库连接位置
-<h1>引用</h1>
-<h1>1.问题</h1>
-<li><a href="../../pages/Demo/arcmap/arcmap.html" target="_blank">ArcGIS Map</a></li>
-<li><a href="problom.html">问题</a></li>
-
-
-
-<h1>点线表字段说明</h1>
-<h2>1.线表</h2>
-<ul>
-    <li>起点埋深</li>
-    给水埋深 到管顶<br>
-    排水埋深 到管底（内壁）<br>
-    <li>终点埋深</li>
-    <li>起点高程=起点地面高程-起点埋深</li>
-    <li>终点高程=终点地面高程-终点埋深</li>
-</ul>
-<h2>2.点表</h2>
-<ul>
-    <li>地面高程</li>
-</ul>
-<h1>问题</h1>
-<font style="color: #9c27b0">
-    <ul>
-        <li>埋设方式与管类型的关系 断面类型(0为圆管,1为方管) lsdjnvoihjf890234865</li>
-        if (tGxAnaInfo.DType == "直埋")<br>
-        tGxAnaInfo.DmType = 0;<br>
-        else<br>
-        tGxAnaInfo.DmType = 1;<br>
-        <li>方管与圆管管径存储方式的区别是什么 dkhnd9762650shctri</li>
-        <li>横剖面分析，计算长度时没有考虑高程，因此后续的高程插值计算与实际高程误差很大 sdkhfxvhujf92374682394hxid</li>
-        <li>对硬材料管的高程进行插值计算得出的结果与实际高程基本没有误差，但软材料插值出来的结果是存在一定误差的（随地面高程的改变而改变）（待商榷） 求管线某点高程</li>
-        <li>求管径的算法不一致，冗余  jxhfleinxv89236xhchd 与 jvjuhx[];.'1283 </li>
-        <li>判断管网是否为排水的方法不一致，并且通过编码常量来定义，不支持后期改动 klnfhfkjebr824649123 与 sjdfhioxhgdksdjfh</li>
-        <li>枚举类型是否应该确定到具体类型，else之后是有很多类型的 sdhfhxfdj2384675239hxdfg</li>
-        <li>横剖面与纵剖面图纸间距的问题 求的应该是管线在xy平面投影的长度</li>
-    </ul>
-</font>
-
-
-<h3>菜单按钮处理的公共流程</h3>
-<li>1.点击菜单,所有菜单点击事件共用一个处理器,switch通过item.name分发处理 lshbxkhgh8763912hdsl</li>
-<li>2.修改鼠标样式</li>
-<li>3.MapCtrlMain.CurrentTool = null; arcmap特有工具对象设置为空</li>
-<li>4.ksdofoxhhg0237497 记录当前地图工作状态</li><br>
-<li>5.鼠标左键按下的事件处理程序(Down) FBMouseDown,FBMouseMove,FBEnd三个函数完成鼠标跟踪效果 lsekjfhfvoer923874923</li>
-<li>6.dknfgikr9716349734 鼠标移动时的处理代码 AppComFun.FBMouseMove</li>
-<li>7.鼠标按键释放的处理程序(Up) FBEnd xlkjvhfklhasdfh9123797532</li>
-<h3>UPGIS类库的调用方式</h3>
-Program.UPGISFacade.LSGOMenuAnalysis.SelectPipeLine(pEnv, _mapCtrl); skjhvhofr02374hdfbqiodbxlz<br>
-public static UPGISSystemFacade UPGISFacade; 单例集合管理实例对象调用 jxnfj388jbzhwi<br>
-<h3>GISMAP相关的操作接口</h3>
-<h4>1.地图对象的搜索方法</h4>
-
 
 
 <h2>埋设方式与管类型的关系 断面类型(0为圆管,1为方管) lsdjnvoihjf890234865</h2>
@@ -124,7 +69,7 @@ sngDs = tGxAnaInfo.Ds2 * 0.001;<br>
 <h3>管线终点管底高程=终点高程-直径</h3>
 <h3>管线起点中心高程=(起点高程+管线起点管底高程)/2</h3>
 <h3>管线终点中心高程=(终点高程+管线终点管底高程)/2</h3>
-<li><img src="../../images/21.png"/></li>
+<li><img src="img/28.png"/></li>
 <h3>管线起点到交点的距离</h3>
 CrsToP1 = Math.Sqrt(Math.Pow(tGxAnaInfo.CrsX - dX1, 2) + Math.Pow(tGxAnaInfo.CrsY - dY1, 2));
 <h3>管线长度</h3>

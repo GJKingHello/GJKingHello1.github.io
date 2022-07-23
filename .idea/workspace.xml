@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1e322cf-38c8-46ca-8824-4c41dbcca02b" name="变更" comment="1">
+      <change afterPath="$PROJECT_DIR$/document/classDiagram.eddx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/decision-making analysis/img/16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/decision-making analysis/img/17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/decision-making analysis/img/18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/decision-making analysis/img/19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/decision-making analysis/img/24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/decision-making analysis/img/25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/decision-making analysis/img/26.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/decision-making analysis/img/27.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/decision-making analysis/arcmap-Example.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/decision-making analysis/arcmap-Example.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/decision-making analysis/function.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/decision-making analysis/function.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/decision-making analysis/problom.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/decision-making analysis/problom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/decision-making analysis/summery.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/decision-making analysis/summery.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/english/word.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/english/word.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +54,21 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="GJKingHello.github.io" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="GJKingHello.github.io" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -52,7 +80,11 @@
       <workItem from="1658194648162" duration="9169000" />
       <workItem from="1658274727939" duration="77000" />
       <workItem from="1658274818418" duration="24063000" />
-      <workItem from="1658361297799" duration="21939000" />
+      <workItem from="1658361297799" duration="24387000" />
+      <workItem from="1658447424567" duration="14468000" />
+      <workItem from="1658488769938" duration="654000" />
+      <workItem from="1658535773371" duration="560000" />
+      <workItem from="1658543702942" duration="610000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1658385777859</created>
@@ -103,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658391278223</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="1">
+      <created>1658392064641</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1658392064641</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

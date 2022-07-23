@@ -417,6 +417,13 @@
     <ul>
         <li id="WholeDBPipelineLength"><font style="color: red">1.全库管线长度统计</font></li>
         <img src="img/1.png"/><br>
+        管线大类<br>
+        选择管线子类：要进行统计的图层<br>
+        分类属性:对每个图层进行分组统计的属性<br>
+        现有计算：使用线表中的管段间距作为管线长度来统计（sql语句统计）<br>
+        重新计算：使用x,y,高程来计算管线长度（sql语句统计）<br>
+        一层循环：遍历图层->使用Sql语句进行分组统计查询<br>
+        <br>
         jhnckemfjr178236gsydf723y 菜单栏点击事件<br>
         FrmStatGdNumOrGxLen 参数设置界面<br>
         传入数据： IType = 0（0代表管线 1代表管点） 和地图控件 _mapCtrl<br>
@@ -427,11 +434,17 @@
         获得表名称："Select Name From TableInfo Where [IsMetaDataSet]='True'"<br>
         重新计算：select A.材质 as F1,Sum(sqr((A.起点高程-A.终点高程)*(A.起点高程-A.终点高程)+(B.Y-C.Y)*(B.Y-C.Y)+(B.X-C.X)*(B.X-C.X))) AS F2 from (JSL as A inner join JSP as B on A.起始点号=B.物探点号) inner join JSP as C on A.终止点号=C.物探点号 Group BY A.材质<br>
         <font style="color: blue">
-            注：1.管线长度使用的是x,y,点高程(没有区分是否为排水)
+            注：1.管线长度使用的是x,y,点高程(没有区分是否为排水),计算长度的话只要高程位置类型一致即可，长度是一样的
         </font>
 
         <li id="WholeDBPipePointCount"><font style="color: red">2.全库管点数量统计</font></li>
         <img src="img/2.png"/><br>
+        管线大类<br>
+        选择管线子类：要进行统计的图层<br>
+        分类属性:对每个图层进行分组统计的属性<br>
+        统计：对每个图层按属性分组统计管点数量(sql语句统计)<br>
+        一层循环：遍历图层->使用Sql语句进行分组统计查询<br>
+        <br>
         hcheie938hxaoxjeu28 菜单栏点击事件<br>
         jfnvjr893472jd893uiihao 开始统计（与全库管线统计用的同一个界面）<br>
         FrmStatGdNumOrGxLen 参数设置界面<br>
@@ -444,17 +457,27 @@
 
         <li id="WholeDBPipeLineSortStatic"><font style="color: red">3.全库管线分类统计</font></li>
         <img src="img/3.png"/><br>
+        选择管线大类<br>
+        选择管线子类：需要统计的图层<br>
+        分类属性：需要分类统计的属性<br>
+        现有计算：使用管段间距字段来计算管段长度,使用arcmap接口来查找管段<br>
+        重新计算：使用x,y,高程来计算长度,使用arcmap接口来查找管段<br>
+        三层循环：遍历图层->遍历分类属性->遍历属性值->进行统计<br>
+        <br>
         cjjdhj28337883yd82jdjhaie 菜单栏点击事件<br>
         hcjdnfjf9347hsd89h3 开始统计（与全库管线/管点统计用的不是同一个界面）<br>
         FrmStatByClass 参数设置界面<br>
         IType = 0<br>
         枚举出分类属性的所有值 xjjefj29311x0cvje03<br>
+        通过图层名称获得表名称，再获得字段值<br>
+        通过IQueryDef查找字段所有值枚举  DISTINCT(材质)<br>
         <font style="color: blue">当属性值为DBNull时，设置为未分类类别，这个类别是无法在数据库中查找到记录<br></font>
         调用方法B：public StatInfo StatByCondition(MapControl MapCtrl, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, IGeometry Geometry)<br>
         通过SpatialFilterClass.whereClouse进行管线查询<br>
         现有计算，对 管段间距 求和<br>
         重新计算,tmpLng = System.Math.Sqrt((H1(起点高程) - H2(终点高程)) * (H1 - H2) + pPolyline.Length * pPolyline.Length);  jjcjvhifuy9234976xgbcv0q3-ejco99u20M<br>
         <font style="color: blue">
+            注:<br>
             在arcgis几何长度基础之上，增加了高程，进而求出管线的空间长度<br>
             使用的是线表点高程，但没有区分给水与排水<br>
         </font>
@@ -462,6 +485,12 @@
 
         <li id="WholeDBPipePointSortStatic"><font style="color: red">4.全库管点分类统计</font></li>
         <img src="img/4.png"/><br>
+        选择管线大类<br>
+        选择管线子类：需要统计的图层<br>
+        分类属性：需要分类统计的属性<br>
+        使用arcmap接口来查找管点,进而统计管点数量<br>
+        三层循环：遍历图层->遍历分类属性->遍历属性值->进行统计<br>
+        <br>
         jhxhb98dvjkbhb3r09k1kcb3 菜单栏点击事件<br>
         统计界面与 全库管线分类统计 用的同一个界面<br>
         FrmStatByClass 参数设置界面<br>
@@ -473,6 +502,16 @@
 
         <li id="WholeDBPipeMaterialsSortStatic"><font style="color: red">5.按管线材质统计</font></li>
         <img src="img/5.png"/><br>
+        选择管线大类<br>
+        选择管线子类:选择需要进行统计的图层<br>
+        自动分类:有问题，应该设置为不可修改，固定的某个分类属性<br>
+        输入或选择材质:选择要进行统计的分类属性值<br>
+        现有计算:通过管段间距来计算长度,通过arcmap接口来查找条件管线<br>
+        重新计算：通过x,y,高程来计算长度,通过arcmap接口来查找条件管线<br>
+        <font style="color: blue">两层循环:遍历图层->遍历所选属性值->进行统计(And 组合选中的属性值)   实际不应该如此，一层循环即可<br></font>
+
+        <br>
+
         <img src="img/6.png"/><br>
         nxdfj2389dyv298d93 菜单栏点击事件<br>
         FrmStatOneStep 参数设置对话框 IStatType = 1<br>
@@ -485,27 +524,77 @@
         点完查询，参数设置界面隐藏<br>
 
         <li id="WholeDBPipeDiameterSortStatic"><font style="color: red">6.按管线管径统计</font></li>
+        <img src="img/16.png"/><br>
+        选择管线大类<br>
+        选择管线子类:选择需要进行统计的图层<br>
+        自动分类:有问题，应该设置为不可修改，固定的某个分类属性<br>
+        输入或选择材质:选择要进行统计的分类属性值<br>
+        现有计算:通过管段间距来计算长度,通过arcmap接口来查找条件管线<br>
+        重新计算：通过x,y,高程来计算长度,通过arcmap接口来查找条件管线<br>
+        <font style="color: blue">两层循环:遍历图层->遍历所选属性值->进行统计(And 组合选中的属性值)   实际不应该如此，一层循环即可<br></font>
+        <br>
+        <img src="img/17.png"/><br>
         jjixnfj2391hsdfh92384 菜单栏点击事件<br>
         FrmStatOneStep 参数设置对话框 IStatType = 2<br>
         同上，调用同一个参数设置界面，IStatType值不同仅仅对界面选项进行设置，算法一致<br>
 
         <li id="WholeDBPipeAgeSortStatic"><font style="color: red">7.按建设年代统计</font></li>
+        <img src="img/18.png"/><br>
+        选择管线大类<br>
+        选择管线子类:选择需要进行统计的图层<br>
+        自动分类:有问题，应该设置为不可修改，固定的某个分类属性<br>
+        输入或选择材质:选择要进行统计的分类属性值<br>
+        现有计算:通过管段间距来计算长度,通过arcmap接口来查找条件管线<br>
+        重新计算：通过x,y,高程来计算长度,通过arcmap接口来查找条件管线<br>
+        <font style="color: blue">两层循环:遍历图层->遍历所选属性值->进行统计(And 组合选中的属性值)   实际不应该如此，一层循环即可<br></font>
+        <br>
+        <img src="img/19.png"/><br>
         jjxi39xc2330kqlx,fbn29 菜单栏点击事件<br>
         FrmStatOneStep 参数设置对话框 IStatType = 3<br>
         同上，调用同一个参数设置界面，IStatType值不同仅仅对界面选项进行设置，算法一致<br>
 
         <li id="WholeDBPipeWorkSortStatic"><font style="color: red">8.按权属单位统计</font></li>
+        <img src="img/24.png"/><br>
+        选择管线大类<br>
+        选择管线子类:选择需要进行统计的图层<br>
+        自动分类:有问题，应该设置为不可修改，固定的某个分类属性<br>
+        输入或选择材质:选择要进行统计的分类属性值<br>
+        现有计算:通过管段间距来计算长度,通过arcmap接口来查找条件管线<br>
+        重新计算：通过x,y,高程来计算长度,通过arcmap接口来查找条件管线<br>
+        <font style="color: blue">两层循环:遍历图层->遍历所选属性值->进行统计(And 组合选中的属性值)   实际不应该如此，一层循环即可<br></font>
+        <br>
+        <img src="img/25.png"/><br>
         hjcjhdb38fh8j3hc912bf 菜单栏点击事件<br>
         FrmStatOneStep 参数设置对话框 IStatType = 4<br>
         同上，调用同一个参数设置界面，IStatType值不同仅仅对界面选项进行设置，算法一致<br>
 
         <li id="WholeDBPipeRoadrSortStatic"><font style="color: red">9.按所在道路统计</font></li>
+        <img src="img/26.png"/><br>
+        选择管线大类<br>
+        选择管线子类:选择需要进行统计的图层<br>
+        自动分类:有问题，应该设置为不可修改，固定的某个分类属性<br>
+        输入或选择材质:选择要进行统计的分类属性值<br>
+        现有计算:通过管段间距来计算长度,通过arcmap接口来查找条件管线<br>
+        重新计算：通过x,y,高程来计算长度,通过arcmap接口来查找条件管线<br>
+        <font style="color: blue">两层循环:遍历图层->遍历所选属性值->进行统计(And 组合选中的属性值)   实际不应该如此，一层循环即可<br></font>
+        <br>
+        <img src="img/27.png"/><br>
         bxcbv2330912nv023jfa;ls92 菜单栏点击事件<br>
         FrmStatOneStep 参数设置对话框 IStatType = 5<br>
         同上，调用同一个参数设置界面，IStatType值不同仅仅对界面选项进行设置，算法一致<br>
 
         <li id="WholeDBSimpleConditionStatic"><font style="color: red">10.全库简单条件统计</font></li>
         <img src="img/7.png"/><br>
+        管线大类<br>
+        管线子类:要进行统计的图层<br>
+        统计类型:要进行统计的类型，管线还是管点<br>
+        具有属性:进行分类统计的属性类别<br>
+        属性值:进行统计的属性值<br>
+        现有计算：通过管段间距来计算长度,通过arcmap接口来查找条件管线<br>
+        重新计算:通过x,y,高程来计算长度,通过arcmap接口来查找条件管线<br>
+        通过参数设置界面敲定需要统计的语句参数，哪个图层，哪个属性，属性中哪个值<br>
+        <font style="color: blue">一层循环：对属性值的遍历，实际上应该去掉<br></font>
+        <br>
         <img src="img/8.png"/><br>
         hixidf893bc93dasf3 菜单栏的点击事件<br>
         FrmStatSimple 参数设置对话框<br>
@@ -515,6 +604,15 @@
 
         <li id="WholeDBComplexConditionStatic"><font style="color: red">11.全库复合条件统计</font></li>
         <img src="img/9.png"/><br>
+        选择管线子类:要进行统计的图层<br>
+        查询类型:要进行统计的类别，管线还是管点<br>
+        基本条件:设置查询条件<br>
+        查询表达式：管线查询的条件<br>
+        自动分类:用作枚举属性所有值<br>
+        现有计算：通过管段间距来计算长度,通过arcmap接口来查找条件管线<br>
+        重新计算:通过x,y,高程来计算长度,通过arcmap接口来查找条件管线<br>
+        <font style="color: blue">一层循环：对属性值的循环，不正确，arcgis Map的SpatialFilterClass接口使用有问题并没有达到and的效果<br></font>
+        <br>
         <img src="img/10.png"/><br>
         jhcb29dscb109df330dha 菜单栏的点击事件<br>
         FrmStatComplex 参数设置对话框<br>
@@ -525,11 +623,19 @@
         <li id="WholeDBRegionPipleLineStatic"><font style="color: red">12.区域内管线长度统计</font></li>
         <img src="img/11.png"/><br>
         <img src="img/12.png"/><br>
+        区域选择:划定区域，通过arcgis接口获得区域内管线<br>
+        选择管线大类<br>
+        选择管线子类：选择要进行统计的图层<br>
+        分类属性:选择要进行统计查询的属性<br>
+        现有计算：通过管段间距来计算长度,通过arcmap接口来查找条件管线<br>
+        重新计算:通过x,y,高程来计算长度,通过arcmap接口来查找条件管线<br>
+        两层循环：遍历图层->遍历属性值->统计管线长度<br>
+        <br>
         hci82jnjc91kfg;'xckh 菜单栏的点击事件<br>
         FrmInputByCoordinate 区域选择对话框<br>
         hxubasfbeurbxh82349hc83 鼠标点击事件M<br>
         FrmStatGdNumOrGxLen 区域管线长度统计参数设置对话框<br>
-        Program.UPGISFacade.FormRunList.FrmStatGdNumOrGxLen.IType = 2;
+        Program.UPGISFacade.FormRunList.FrmStatGdNumOrGxLen.IType = 2;<br>
         调用方法B：public StatInfo StatByCondition(MapControl MapCtrl, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, IGeometry Geometry)<br>
         通过 SpatialFilterClass 来查询要统计的区域以及查询条件，长度单独计算<br>
 
@@ -537,17 +643,34 @@
         <li id="WholeDBRegionPiplePointcountStatic"><font style="color: red">13.区域内管点数量统计</font></li>
         <img src="img/11.png"/><br>
         <img src="img/13.png"/><br>
+        区域选择:划定区域，通过arcgis接口获得区域内管线<br>
+        选择管线大类<br>
+        选择管线子类：选择要进行统计的图层<br>
+        分类属性:选择要进行统计查询的属性<br>
+        两层循环：遍历图层->遍历属性值->统计管点数量<br>
+        <br>
         hu892c921h0d=ac023 菜单栏的点击事件<br>
         FrmInputByCoordinate 区域选择对话框<br>
         hxubasfbeurbxh82349hc83 鼠标点击事件<br>
         FrmStatGdNumOrGxLen 区域管线长度统计参数设置对话框<br>
-        Program.UPGISFacade.FormRunList.FrmStatGdNumOrGxLen.IType = 3;
+        Program.UPGISFacade.FormRunList.FrmStatGdNumOrGxLen.IType = 3;<br>
         调用方法B：public StatInfo StatByCondition(MapControl MapCtrl, string LayerName, string StatField, string WhereClause, lsgoStatType StatType, short CaculateType, IGeometry Geometry)<br>
         通过 SpatialFilterClass 来查询要统计的区域以及查询条件，长度单独计算<br>
 
         <li id="WholeDBRegionComplexConditionStatic"><font style="color: red">14.区域内复合条件统计</font></li>
         <img src="img/14.png"/><br>
         <img src="img/15.png"/><br>
+        区域选择:划定区域，通过arcgis接口获得区域内管线<br>
+        选择管线子类:要进行统计的图层<br>
+        查询类型:要进行统计的类别，管线还是管点<br>
+        基本条件:设置查询条件<br>
+        查询表达式：管线查询的条件<br>
+        自动分类:用作枚举属性所有值<br>
+        现有计算：通过管段间距来计算长度,通过arcmap接口来查找条件管线<br>
+        重新计算:通过x,y,高程来计算长度,通过arcmap接口来查找条件管线<br>
+        <font style="color: blue">一层循环：对属性值的循环，不正确，arcgis Map的SpatialFilterClass接口使用有问题并没有达到and的效果<br></font>
+        <br>
+
         hc9c823hpcj=rgp3JJ9023H 菜单栏的点击事件<br>
         FrmStatSelectControl 区域选择对话框<br>
         jjxjdi23ijd8203jcc-1=-1jf 鼠标点击事件<br>
